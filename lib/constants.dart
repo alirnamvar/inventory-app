@@ -4,6 +4,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 const Color kAppBarBackgroundColor = Color(0xFF0A0E25);
 const Color kScaffoldBackgroundColor = Color(0xFF0A0E21);
 const Color kElevatedButtonPrimaryColor = Color(0xFF000062);
+const Color kPalletNotSelected = Color(0xFF1D1E33);
 
 const TextStyle kButtonTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
