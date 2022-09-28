@@ -118,7 +118,6 @@ class _OrderPageState extends State<OrderPage> {
         100 * greenRawMaterialOrder +
         10 * blueRawMaterialOrder +
         1 * whiteRawMaterialOrder;
-    // print('${int.parse(orderNumberInServer!) + 1}');
     redisServer.setCommand('order:${int.parse(orderNumberInServer!) + 1}',
         finalToServer.toString());
     await Future.delayed(const Duration(milliseconds: 2000));
@@ -232,10 +231,6 @@ class _OrderPageState extends State<OrderPage> {
 
   @override
   Widget build(BuildContext context) {
-    // String inventoryUpdatedText = 'Haa';
-    // String storeRoomStatusText = everFetchInventory == false
-    //     ? 'Click fetch button to see inventory...'
-    //     : inventoryUpdatedText;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
