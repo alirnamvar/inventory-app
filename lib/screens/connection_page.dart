@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../redis_handler.dart';
+import '../mysql_handler.dart';
 import 'package:inventory/constants.dart';
 
 var redisServer;
+var mysqlServer;
 
 class ConnectionPage extends StatefulWidget {
   static String id = 'connection_page';
@@ -51,13 +53,7 @@ class _ConnectionPageState extends State<ConnectionPage> {
   }
 
   void _disconnectButtonFunction() {
-    // print('##### Start _disconnectButtonFunction #####');
     redisServer.close();
-    // Future.delayed(
-    //     const Duration(milliseconds: 500),
-    //     () => {
-    //
-    //         });
 
     setState(() {
       _orderPageButtonOnPressed = null;
@@ -65,24 +61,23 @@ class _ConnectionPageState extends State<ConnectionPage> {
       _inventoryPageButtonOnPressed = null;
       connectionStatusToShow = 'Disconnected from $_server!';
     });
-    // print('##### End _disconnectButtonFunction #####');
   }
 
   void _setServerAndPort() {
     _server = serverHandler.text;
     _port = int.parse(portHandler.text);
+
     redisServer = RedisHandler(server: _server, port: _port);
     redisServer.makeConnection();
-    // sleep(Duration(seconds: 2));
+    mysqlServer = MysqlHandler(server: _server);
+    mysqlServer.makeConnection();
+
     Future.delayed(
         const Duration(milliseconds: 500),
         () => {
-              // print('***** ${redisServer.getConnectionStatus()} *****'),
               setState(() {
                 if (redisServer.connectionStatus == true) {
-                  // print("connection status is true and ...");
                   connectionStatusToShow = 'Connected to $_server:$_port';
-                  // _connectionPageOnPressed = null;
                   _orderPageButtonOnPressed = () {
                     Navigator.pushNamed(context, 'order_page');
                   };
@@ -92,15 +87,11 @@ class _ConnectionPageState extends State<ConnectionPage> {
                   _disconnectButtonOnPressed = _disconnectButtonFunction;
                 } else {
                   connectionStatusToShow = 'Disconnected!';
-                  // _connectionPageOnPressed = null;
                   _orderPageButtonOnPressed = null;
                   _disconnectButtonOnPressed = null;
                 }
               })
             });
-
-    // redisServer.setCommand("yellow", '40');
-    // print('server: $_server and port: $_port');
   }
 
   @override
