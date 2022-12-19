@@ -31,6 +31,7 @@ class RedisHandler {
   Future<void> getCommand(String key) async {
     conn.connect(server, port).then((Command command) {
       command.send_object(["GET", key]).then((var response) async {
+        // print("GET::key:$key, value:$response");
         await storage.write(key: key, value: response);
       });
     });
@@ -39,6 +40,7 @@ class RedisHandler {
   void setCommand(String key, String value) {
     conn.connect(server, port).then((Command command) {
       command.send_object(["SET", key, value]).then((var response) {
+        // print("SET::key:$key, value:$value");
         assert(response == 'OK');
       });
     });

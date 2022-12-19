@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:inventory/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';

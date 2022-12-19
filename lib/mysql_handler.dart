@@ -31,6 +31,7 @@ class MysqlHandler {
     for (var row in results) {
       palletFilledList.add(row[0]);
     }
+    print(palletFilledList);
     return palletFilledList;
   }
 }
